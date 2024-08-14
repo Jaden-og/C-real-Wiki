@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C-real Wiki by perkedupfly</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .container {
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        pre {
+            background-color: #eee;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: disc;
+            padding-left: 20px;
+        }
+        ol {
+            margin: 0;
+            padding: 0;
+            list-style: decimal;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#basic-setup">Basic Setup</a></li>
+                <li><a href="#kaboom-command">Kaboom Command</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <section id="basic-setup" class="section">
+		<h1>C-real Wiki</h1>
+		
+            <h2>Basic Setup and Knowledge for Using the Bot</h2>
+            
+            <h3>Requirements to Run the Bot Using Source Code</h3>
+            <ul>
+                <li>Python version &gt;= 3.8.0</li>
+                <li>Python-pip version &gt;= 21.3.0</li>
+                <li>[Optional] Git; use the latest version</li>
+                <li>A few Python external modules (use the latest version):
+                    <ul>
+                        <li>discord (may use another Discord Python API module due to maintenance issues)</li>
+                        <li>packaging</li>
+                        <li>requests</li>
+                        <li>colorama</li>
+                        <li>inputimeout</li>
+                        <li>simplejson</li>
+                    </ul>
+                </li>
+            </ul>
+            <p>Note: You can use <code>python3 -m pip install -r requirements.txt</code> to install the required modules. The <code>requirements.txt</code> file is located in the main branch.</p>
+
+            <h3>Start Setting Up</h3>
+            <p>To set up the bot with minimal configuration, you'll need a Discord user ID and a Discord bot token. This setup will allow the bot to respond to commands from privileged users in Discord chat.</p>
+            <p>Without additional configuration, you won't be able to use commands like <code>kaboom</code> and webhook spam, but you can use the <code>nuke</code> command. You can configure these settings anytime after completing the basic setup.</p>
+            <p>If you are a Windows user, you can download the precompiled (.exe) version <a href="https://github.com/Jaden-og/Discord-nuker/releases/download/EXE/c-realV2.exe">here</a>.</p>
+
+            <h3>Build/Run the Bot</h3>
+            <p>If you are using the .exe version for Windows users, you can double-click the .exe file to run it. Skip to the <strong>Entering Authentication</strong> section to continue setup.</p>
+            <pre><code>git clone
+cd Nuking-Discord-Server-Bot-Nuke-Bot
+python3 -m pip install -r requirements.txt
+python3 c-realV2.py
+</code></pre>
+
+            <h3>Entering Authentication</h3>
+            <p>When you start the bot for the first time, you will be prompted with:</p>
+            <pre><code>Enter token. >>></code></pre>
+            <p>Enter your Discord bot token here. If you don't have a bot token, refer to the <a href="#bot-token">Bot Token</a> section.</p>
+            <p><strong>Note:</strong> Support for selfbot tokens is deprecated. While selfbot features are not removed, they may have bugs or be unusable.</p>
+
+            <p>After entering the token, you will need to enter your Discord user ID that will be used to command the bot. For instructions on how to obtain your Discord user ID, refer to the <a href="#how-to-get-user-id">How to Get User ID</a> section.</p>
+
+            <h3>Bot Access Permissions</h3>
+            <p>Discord user IDs are needed for the bot to identify the owner(s) and grant access to commands. Privileged users can manage permissions during runtime using:</p>
+            <pre><code>.config permissions add &lt;user ID&gt;</code></pre>
+            <p>Or give all permissions to everyone:</p>
+            <pre><code>.gap</code></pre>
+
+            <h3>Check and Add Permissions</h3>
+            <p>There are two ways to check permissions:</p>
+            <ul>
+                <li>Use <code>.config permissions list</code></li>
+                <li>Open the configuration file (usually named <code>default.json</code>)</li>
+            </ul>
+            <p>To modify permissions, you can:</p>
+            <ul>
+                <li>Use <code>.config permissions &lt;add|remove&gt; &lt;UserID|line number&gt;</code> (you can find line numbers using <code>.config permissions list</code>)</li>
+                <li>Edit the "permissions" section in the configuration file. Example:</li>
+            </ul>
+            <pre><code>{
+    // ...
+    "permissions": [
+        "349338062485979136", // Discord ID
+        "713936815022932079"  // Another Discord ID
+    ],
+    // ...
+}</code></pre>
+        </section>
+
+        <section id="kaboom-command" class="section">
+            <h2>Setup bomb_message to Use kaboom Command</h2>
+            <p>The Kaboom command is a combination of three commands:</p>
+            <ul>
+                <li><code>.channelbomb</code> - Spam creating text channels</li>
+                <li><code>.rolebomb</code> - Spam creating roles</li>
+                <li><code>.categorybomb</code> - Spam creating categories</li>
+            </ul>
+            <p>To use any of the bomb commands, you need to configure the <code>bomb_message</code> feature. There are two ways to configure the <code>bomb_message</code> feature:</p>
+            <ol>
+                <li>Directly edit <code>bomb_message</code> in your configuration file (usually called <code>default.json</code>)</li>
+                <li>Use <code>.config bomb_messages &lt;wordlist&gt; &lt;operation&gt; &lt;data&gt;</code></li>
+            </ol>
+
+            <h3>Configuration</h3>
+            <p>Inside the <code>bomb_message</code> feature, you will see two items: <code>random</code> and <code>fixed</code>. These are wordlists used for creating names for roles, categories, and text channels.</p>
+
+            <h4>Random Wordlist</h4>
+            <p>Used for creating random names. To configure the random wordlist, use:</p>
+            <pre><code>.config bomb_messages random &lt;word length&gt;</code></pre>
+            <p>Example: <code>.config bomb_message random 10</code></p>
+            <p>Or edit the configuration file directly:</p>
+            <pre><code>{
+    // ...
+    "bomb_messages": {
+        "random": 10, // note that this has to be a positive integer
+        // ...
+    },
+    // ...
+}</code></pre>
+
+            <h4>Fixed Wordlist</h4>
+            <p>Used for creating names with words randomly chosen from a list provided by the user. To configure the fixed wordlist, use:</p>
+            <pre><code>.config bomb_messages fixed add &lt;one line of words&gt;</code></pre>
+            <p>Example: <code>.config bomb_message fixed add C-REAL on top</code></p>
+            <p>Or edit the configuration file directly:</p>
+            <pre><code>{
+    "bomb_messages": {
+        "fixed": [
+            "C-REAL",
+            "on",
+            "top"
+        ],
+        // ...
+    },
+    // ...
+}</code></pre>
+        </section>
+
+        <section id="faq" class="section">
+            <h2>FAQ</h2>
+
+            <h3>How to Get the Bot Token?</h3>
+            <p>To get a bot token:</p>
+            <ol>
+                <li>Go to the Discord Developer Portal</li>
+                <li>Create or log into your account</li>
+                <li>Create a new application</li>
+                <li>Give the application a name and click "Create"</li>
+                <li>Select the "Bot" tab in the menu</li>
+                <li>Click "Add Bot" and confirm</li>
+                <li>If you receive an error about username availability, change the bot's name in "General Information"</li>
+                <li>Enable privileged intents</li>
+                <li>Copy the bot token and start using it</li>
+            </ol>
+
+            <h3>How to Get User ID?</h3>
+            <p>To get your Discord user ID:</p>
+            <ol>
+                <li>Log into Discord</li>
+                <li>Go to User Settings</li>
+                <li>Scroll to "Advanced" and enable Developer Mode</li>
+                <li>Right-click on the user's profile picture and select "Copy ID"</li>
+            </ol>
+        </section>
+    </div>
+</body>
+</html>
